@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        h1{font-size: 40px;color: black}
+        h2{color: black;font-size: 40px;}
+        h3{color: black;font-size: 40px;}
+        menu{text-align: center;
+                padding: 400px;
+                background-color: gold;
+                color: black;}
+        content{width: auto;background-color:black;color: black;margin: auto;}
+        header{background-color: black;color:black}  
+       
+            .active {
+                background-color: black;
+            }
+          header{background-color: black;}
+            footer {
+                text-align: center;
+                padding: 3px;
+                background-color: gold;
+                color: black;
+            }
+    
+            
+    #testForm
+    {color: black;}
+    
+    #status
+    {color: black;}
+    
+    .button{
+        background-color: black;
+        border: 5px solid black;
+        color: white;
+        padding: 5px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        margin: 4px 2px;
+        cursor: pointer;
+        font-size: 14px;
+        border-radius: 20px;
+    }
+    
+    .myTable{
+        margin: auto;
+        width: 60%;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+    
+        .myTable td, .myTable th{
+            border:1px solid black;
+            padding: 2px;
+        }
+    
+    .myTable tr :nth-child 
+    
+    .myTable th {
+        padding-top: 14px;
+        text-align: center;
+        color: black;
+        }
+    
+    #opportunities
+    {text-align: center;
+    margin: auto;
+    padding-top: 10px;
+    padding-right: 15px;
+    padding-left: 15px;
+    padding-bottom: 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    border-radius: 5px;
+    }
+    
+    #submitButton
+    {
+        display: none;
+        text-align: center;
+    }
+    
+    #radioForm
+    {
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    #finalResult
+    {
+        color: black;
+        font-size: 18px;
+        text-align: center;
+        margin: auto;
+        width: auto;
+    }
+    
+    #hideDrop
+    {
+        display: none;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+        }
+    
+    #hideDrop2
+    {
+        display: none;
+        text-align: center;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    
+    .gradform {
+    display: none;
+    color: black;
+    }
+    
+    .undergradform
+    {
+        display: none;
+        color: black
+    }
+    
+    #showgrade
+    {display: none;}
+
+    #grades
+    {display: none;}
+   
+   </style>
+    
+    <div id="grades"></div>
+    <meta charset="utf-8">
+    <title>CARIT - Center for Applied Research in Information Technology</title>
+    <link rel="stylesheet" type="text/css" href=styles.css">
+
+    <script type="text/javascript">
+        function submitRadio()
+        {
+            var radiobuttons = document.forms[0].status;          
+            if (radiobuttons[0].checked)
+                status=radiobuttons[0].value;
+            else if (radiobuttons[1].checked)
+                status=radiobuttons[1].value;
+            dropDown()
+        }
+
+        function dropDown(){
+            if (status == "grad"){
+                document.getElementById("hideDrop").style.display = "block"; 
+                document.getElementById("submitButton").style.display = "block";
+                document.getElementById("finalResult").innerHTML = "";}
+            else if (status == "undergrad"){
+                document.getElementById("hideDrop").style.display = "block"; 
+                document.getElementById("submitButton").style.display = "block";
+                document.getElementById("finalResult").innerHTML = "";}
+            if (status == "undergrad"){
+               document.getElementById("hideDrop2").style.display = "block";}
+            else if (status == "grad"){
+                document.getElementById("hideDrop2").style.display = "none";}
+            
+            var x = document.getElementsByClassName("gradform");
+            var y = document.getElementsByClassName("undergradform");
+            if (status == "undergrad") {
+                y[0].style.display = "block";
+                y[1].style.display = "block";
+                y[2].style.display = "block";
+                y[3].style.display = "block";
+                y[4].style.display = "block";
+                x[0].style.display = "none";
+                x[1].style.display = "none";
+                x[2].style.display = "none";
+                x[3].style.display = "none";
+                x[4].style.display = "none";   
+        }
+        else if (status == "grad"){
+            y[0].style.display = "none";
+            y[1].style.display = "none";
+            y[2].style.display = "none";
+            y[3].style.display = "none";
+            y[4].style.display = "none";
+            x[0].style.display = "block";
+            x[1].style.display = "block";
+            x[2].style.display = "block";
+            x[3].style.display = "block";
+            x[4].style.display = "block"; 
+        }
+    }
+
+    function submitDrop()
+    {
+        var grade1 = document.forms[0].grade1.value;
+            var grade2 = document.forms[0].grade2.value;
+            var grade3 = document.forms[0].grade3.value;
+            var grade4 = document.forms[0].grade4.value;
+            var grade5 = document.forms[0].grade5.value;
+            if (status == "undergrad"){var result=(parseFloat(grade1)+parseFloat(grade2)+parseFloat(grade3)+parseFloat          (grade4)+parseFloat(grade5))/5;}
+            else if (status == "grad") {var result=(parseFloat(grade1)+parseFloat(grade2)+parseFloat(grade3)+parseFloat         (grade4))/4;}
+            var result = result.toFixed(1);
+            if (status == "grad" && result > 3.7){document.getElementById("finalResult").innerHTML = "Your GPA is " + result + ". Congratulations Graduate Student! You are eligible to apply for the student assistant position. Please follow this link to apply <a href = 'applicationform.html'>for a student CARIT role</a>.";}
+            else if (status == "grad" && result < 3.7){document.getElementById("finalResult").innerHTML = "Your GPA is " + result + ". Thank you for your interest in CARIT, graduate student. Unfortunately, your GPA does not meet the minimum requirements to apply for the student assistant position.";}
+            else if (status =="undergrad" && result > 3.2){document.getElementById("finalResult").innerHTML = "Your GPA is " + result + ". Congratulations undergraduate student! You are eligible to apply for the student assistant position. Please follow this link to apply <a href = 'applicationform.html'>for a student CARIT role</a>.";}
+            else if (status =="undergrad" && result < 3.2){document.getElementById("finalResult").innerHTML = "Your GPA is " + result + ". Thank you for your interest in CARIT, undergraduate student. Unfortunately, your GPA does not meet the minimum requirements to apply for the student assistant position.";}
+        }
+        </script>
+</head>
+<body>
+    <div id="menu">
+        <div id="header"> 
+            <a href="index.html">Home</a>
+            <a href="faculty.html">About Us</a>
+            <a href="resource.html">Resources</a>
+            <a href="opportunities.html">Opportunities</a>
+
+    </div>
+    <div id="content">
+        <hr>   
+       <center>
+           <h1 style="font-size:40px; text-align: center">Center for Applied Research in Information Technology </h1>    
+           <a href="http://ccse.kennesaw.edu/it" target="blank">
+               <img src="https://webstatic.kennesaw.edu/_omni/images/global/logo_black.png?v=1" align="center" width="auto" height="auto">
+           </a>
+       </center>
+       <hr>
+       <br>
+       <br>
+       <h2 style="font-size: 30px; text-align: center;">2022 CARIT Student Assistant Positions </h2>
+       <br>
+       <br>
+       <div id="opportunities">
+           <h><center><strong>Available Graduate and Undergraduate Positions</strong></h3></center>
+           <p><strong>Student Assistant Roles: </strong>CARIT is currently accepting applications for the 2022 Summer term.  Openings are only available to current graduate and undergraduate students.  Students will be assigned to a research professor based interest and will provide instructions of their primary job duties.</p>
+           <p><strong>Current students must meet the minimum requirements to be eligible to apply. Please review the requirements below for eligibility and complete the application by May 1 for further consideration.</strong></p>
+        <br>
+        <br>
+        </div>
+        <br>
+        <br>
+        <table class="myTable">
+            <tr>
+                <th>Undergraduate Students: <br>GPA greater than 3.2<br> from the required courses below</th>
+                <th>Graduate Students: <br>GPA greater than 3.7<br> from the required courses below</th>
+            </tr>
+            <tr>
+                <td><p>CSE 3203 Mobile System Overview</a></td>
+                <td><p>IT 7113  Data Visualization</a></td>
+                </tr>
+                <tr>
+                <td><p>IT 4213 Mobile Web Development</a></td>
+                <td><p>IT 6713 Business Intelligence</a></td>
+                </tr>
+                <tr>
+                <td><p>IT 4203 Advanced Web Development</a></td>
+                <td><p>IT 7103 Practical Data Analytics</a></td>
+                </tr>
+                <tr>
+                <td><p>IT 4713 Business Intelligence Systems</a></td>
+                <td><p>IT 7143 Cloud Analytics Technology</a></td>
+            </tr>
+            <tr>
+                <td><p>IT 3203 Intro to Web Development</a></td>
+            </tr>
+            </table>
+    </div>
+    <br>
+    <br>
+    <p><strong><center>If you meet the requirements below, please following the submission form to determine GPA eligibility.</strong></p></center>
+    <br>   
+    <center><strong><font size="5">Eligibility Form</strong></center></font>
+<hr style="width:50%; height:1px;" /> </hr>
+<div id="radioForm">
+<form name="profile">
+    <center><strong>Select your current status then click "Submit".</strong></center>
+    <br>
+    <div id="status">
+        <input type="radio" name="status" value="undergrad" />Undergraduate 
+        <input type="radio" name="status" value="grad" />Graduate
+    </div>   
+        <br>
+        <input type="button" class="button" value="Submit" onclick="submitRadio()" />
+        <br>
+    <hr style="width:50%; height: 3px;" /></hr>  
+</div>
+<br>
+<br>
+<div id="hideDrop">
+    <form name="newgrade1" id="testForm">
+        <center><strong>Select your grades for the classes below then click 'Evaluate'.</strong></center>
+        <br>
+        <span class="undergradform">CSE 3203 Mobile System Overview:</span>
+        <span class="gradform">IT 7113 Data Visualization:</span>
+            <select name="grade1">
+                <option value="" selected="selected">-</option>
+                <option value="4">A</option>
+                <option value="3">B</option>
+                <option value="2">C</option>
+                <option value="1">D</option>
+                <option value="0">F</option>
+            </select>
+    <br>
+    <form name="newgrade2">
+        <span class="undergradform">IT 4213 Mobile Web Development:</span>
+        <span class="gradform">IT 6713 Business Intelligence:</span>
+            <select name="grade2">
+                <option value="" selected="selected">-</option>
+                <option value="4">A</option>
+                <option value="3">B</option>
+                <option value="2">C</option>
+                <option value="1">D</option>
+                <option value="0">F</option>
+            </select>
+    <form name="newgrade3">
+            <span class="undergradform">IT 4203 Advanced Web Development:</span>
+            <span class="gradform">IT 6773 Practical Data Analytics: </span>
+                <select name="grade3">
+                    <option value="" selected="selected">-</option>
+                    <option value="4">A</option>
+                    <option value="3">B</option>
+                    <option value="2">C</option>
+                    <option value="1">D</option>
+                    <option value="0">F</option>
+                </select>
+    <form name="newgrade4">
+            <span class="undergradform">IT 4713 Business Intelligence Systems:</span>
+            <span class="gradform">IT 7143 Cloud Analytics Technology:</span>
+                <select name="grade4">
+                    <option value="" selected="selected">-</option>
+                    <option value="4">A</option>
+                    <option value="3">B</option>
+                    <option value="2">C</option>
+                    <option value="1">D</option>
+                    <option value="0">F</option>
+                </select>
+            </div> 
+    <div id="hideDrop2">
+    <form name="newgrade5">
+        <span class="undergradform">IT 3203 Intro to Web Development:</span>
+                <select name="grade5">
+                    <option value="" selected="selected">-</option>
+                    <option value="4">A</option>
+                    <option value="3">B</option>
+                    <option value="2">C</option>
+                    <option value="1">D</option>
+                    <option value="0">F</option>
+                </select>
+            </div>
+    <br>
+        <div id="submitButton">
+            <input type="button" class ="button" value="Evaluate" onclick="submitDrop()" />
+        </div>   
+        <br>
+        <div>
+        <p id="finalResult"></p>
+        </div>
+        </form>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+<footer>
+    <p>Kennesaw State University | 1000 Chastain Road Kennesaw, GA 30144 | 470-KSU-INFO | Web Development Project for
+    <a href="http://it5443.azurewebsites.net/"> IT 5443 Spr2022</a></p>
+</footer>
+            
+</body>
+</header>
+</html>
+            
+
+    
